@@ -1,0 +1,106 @@
+%% 基础配置
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\title{自主评测6}
+\date{}
+\author{}
+
+%% 正文开始
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \renewcommand{\labelenumii}{(\arabic{enumii})}
+    \item
+    \begin{enumerate}
+        \item 在AS1中，子网153.14.5.0/25和子网153.14.5.128/25可以聚合为子网153.14.5.0/24；在AS2中，子网194.17.20.0/25和子网194.17.21.0/24可以聚合为子网194.17.20.0/23，但缺少194.17.20.128/25；子网194.17.20.128/25单独连接到R2的接口E0。 \\ 因此得到以下的路由表：
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{|c|c|c|} 
+                \hline
+                目的网络 & 下一跳 & 接口 \\ 
+                \hline
+                153.14.5.0/24 & 153.14.3.2 & S0 \\ 
+                \hline
+                194.17.20.0/23 & 194.17.24.2 & S1 \\ 
+                \hline
+                194.17.20.128/25 & - & E0 \\ 
+                \hline
+            \end{tabular}
+            \label{table-1}
+            \caption{R2的路由表}
+        \end{table}
+        \item 该IP分组的目的IP地址194.17.20.200与路由表中194.17.20.0/23和194.17.20.128/25两个路由表项均匹配，根据最长匹配原则，R2将通过E0接口转发该IP分组。
+        \item R1与R2之间利用BGP4(或BGP)交换路由信息；BGP4的报文被封装到TCP协议分组进行传输。
+    \end{enumerate}
+
+    \item 根据距离矢量路由算法，收敛状态下各路由器的距离矢量为：
+    \begin{table}[htbp]
+        \centering
+        \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络 & R1 & R2 & R3 \\ 
+            \hline
+            192.168.1.0/24 & 1 & 2 & 3 \\ 
+            \hline
+            192.168.2.0/23 & 3 & 2 & 1 \\ 
+            \hline
+        \end{tabular}
+        \label{table-2}
+    \end{table}
+
+    当R3检测到子网192.168.2.0/23不可到达后，各路由器的距离矢量为：
+    \begin{table}[htbp]
+        \centering
+        \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络 & R1 & R2 & R3 \\ 
+            \hline
+            192.168.1.0/24 & 1 & 2 & 3 \\ 
+            \hline
+            192.168.2.0/23 & 3 & 2 & 3 \\ 
+            \hline
+        \end{tabular}
+        \label{table-3}
+    \end{table}
+
+    \newpage
+
+    交换一次距离矢量后，各路由器的距离矢量为：
+    \begin{table}[htbp]
+        \centering
+        \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络 & R1 & R2 & R3 \\ 
+            \hline
+            192.168.1.0/24 & 1 & 2 & 3 \\ 
+            \hline
+            192.168.2.0/23 & 3 & 4 & 3 \\ 
+            \hline
+        \end{tabular}
+        \label{table-4}
+    \end{table}
+
+    第二次交换距离矢量后，各路由器的距离矢量为：
+    \begin{table}[htbp]
+        \centering
+        \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络 & R1 & R2 & R3 \\ 
+            \hline
+            192.168.1.0/24 & 1 & 2 & 3 \\ 
+            \hline
+            192.168.2.0/23 & 5 & 4 & 5 \\ 
+            \hline
+        \end{tabular}
+        \label{table-5}
+    \end{table}
+    
+    R1所维护的距离矢量包括自身的距离矢量以及邻居R2最新交换过来的距离矢量。
+\end{enumerate}
+
+\end{document}

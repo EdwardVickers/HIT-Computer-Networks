@@ -1,0 +1,63 @@
+%% 基础配置
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\title{自主评测5}
+\date{}
+\author{}
+
+%% 正文开始
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \renewcommand{\labelenumii}{(\arabic{enumii})}
+    %% 注意offset以8字节为单位 4000B的分组长度包含了IP头的20字节
+    \item 3 \quad \\ 123456 \quad 0 \quad 1 \quad 1500 \quad 0 \\
+                     123456 \quad 0 \quad 1 \quad 1500 \quad 185 \\
+                     123456 \quad 0 \quad 0 \quad 1040 \quad 370
+    \item
+    \begin{enumerate}
+        \item 202.118.1.0 \quad 255.255.255.192 \quad 62 \quad 202.118.1.1 \quad 202.118.1.62 \\
+              202.118.1.64 \quad 255.255.255.192 \quad 62 \quad 202.118.1.65 \quad 202.118.1.126
+        \item 子网1分配给局域网1，子网2分配给局域网2。
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络IP地址 & 子网掩码 & 下一跳IP地址 & 接口 \\ 
+            \hline
+            202.118.1.0 & 255.255.255.192 & - & E1 \\ 
+            \hline
+            202.118.1.64 & 255.255.255.192 & - & E2 \\ 
+            \hline
+            202.118.3.2 & 255.255.255.255 & 202.118.2.2 & L0 \\ 
+            \hline
+            0.0.0.0 & 0.0.0.0 & 202.118.2.2 & L0 \\
+            \hline
+            \end{tabular}
+            \label{table-1}
+            \caption{R1的路由表}
+        \end{table}
+        %% 注意路由聚合
+        \item R2的路由表中到局域网1和局域网2的路由：
+        \begin{table}[htbp]
+            \centering
+            \begin{tabular}{|c|c|c|c|} 
+            \hline
+            目的网络IP地址 & 子网掩码 & 下一跳IP地址 & 接口 \\ 
+            \hline
+            202.118.1.0 & 255.255.255.128 & 202.118.2.1 & L0 \\ 
+            \hline
+            \end{tabular}
+            \label{table-2}
+            \caption{R2的路由表中到局域网1、2的表项}
+        \end{table}
+    \end{enumerate}
+    \item 255.255.255.224 \quad 30
+\end{enumerate}
+
+\end{document}

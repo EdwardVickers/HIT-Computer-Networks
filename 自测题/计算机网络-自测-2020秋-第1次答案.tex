@@ -1,0 +1,50 @@
+%% 基础配置
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{zhnumber}
+
+\title{自主评测1}
+\date{}
+\author{}
+
+%% 正文开始
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+    \renewcommand{\labelenumi}{\zhnumber{\theenumi}、}
+    \renewcommand{\labelenumii}{\arabic{enumii}.}
+    \item 填空题 
+        \begin{enumerate}
+            \item 互联 \quad 自治
+            \item 语法 \quad 语义 \quad 时序
+            \item 存储-转发方式
+            \item 网络边缘 \quad 网络核心
+            \item 80.16 \quad 80.24
+            \item 应用层 \quad 表示层 \quad 会话层 \quad 传输层 \quad 网络层 \quad 链路层 \quad 
+                  物理层 \\ 应用层 \quad 表示层 \quad 会话层 \quad 传输层 \quad 网络
+            \item 应用层 \quad 传输层 \quad 网络层 \quad 链路层 \quad 物理层 \quad 应用层 \quad 传输层
+        \end{enumerate}
+    \item 综合题
+        \begin{enumerate}
+            \item 0.9 \quad 0.75
+            \item 0.2 \quad 0.1(这两个是约等于)
+        \end{enumerate}
+\end{enumerate}
+
+% for Q2:
+% a->c 2M
+% b->d 1M
+
+% Time: 0 --- 0.1+e
+% t_a = 9k/20M = 0.00045(s)
+% 10Mb/s * 0.1s = 1Mb
+
+% Time: 0.1+e --- 0.2
+% t_a = t_b = 1k/10M * 7 = 0.0007(s)
+% 10Mb/s * 0.1s = 1Mb
+
+\end{document}
